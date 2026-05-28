@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History</title>
+</head>
+<body>
+<%- include('partials/navbar') %>
+<h1>History</h1>
+
+<table border="1">
+    <tr>
+        <th>No.</th>
+        <th>Date</th>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Cost</th>
+        <th>Actions</th>
+    </tr>
+
+    <% expenses.slice().reverse().forEach((expense, index) => { %>
+        <tr>
+            <td><%= index + 1 %></td>
+            <td><%= expense.date %></td>
+            <td><%= expense.name %></td>
+            <td><%= expense.type %></td>
+            <td><%= expense.cost %></td>
+            <td>
+                <button onclick="window.location.href='/delete/<%= index %>'">
+                    Delete
+                </button>
+            </td>
+        </tr>
+    <% }) %>
+
+</table>
+
+<br>
+
+<!-- FILTER -->
+<form method="GET" action="/history">
+    <select name="type">
+        <option value="All">All</option>
+        <option value="transport">Transport</option>
+        <option value="food">Food</option>
+        <option value="shopping">Shopping</option>
+        <option value="others">Others</option>
+    </select>
+
+    <button type="submit">Filter</button>
+</form>
+
+</body>
+</html>
